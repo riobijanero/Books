@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../common/constants/style_constants.dart';
 import '../view_models/article_view_model.dart';
+import '../common/utils/ui_utils.dart';
 
 class ArticleDetailledWidget extends StatelessWidget {
   final ArticleViewModel article;
@@ -15,7 +16,7 @@ class ArticleDetailledWidget extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(20),
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-          height: 350,
+          height: UiUtils.getCardHeight(article),
           decoration: detailedWidgetDecoration,
           width: double.infinity,
           child: Column(
@@ -27,9 +28,12 @@ class ArticleDetailledWidget extends StatelessWidget {
                   transitionOnUserGestures: true,
                   child: Material(
                     type: MaterialType.transparency,
-                    child: Text(
-                      article.title,
-                      style: articleTitleStyle,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: Text(
+                        article.title,
+                        style: articleTitleStyle,
+                      ),
                     ),
                   ),
                 ),
@@ -39,43 +43,53 @@ class ArticleDetailledWidget extends StatelessWidget {
                   transitionOnUserGestures: true,
                   child: Material(
                     type: MaterialType.transparency,
-                    child: Text(
-                      article.subtitle,
-                      style: articleSubstitlteStyle,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 30),
+                      child: Text(
+                        article.subtitle,
+                        style: articleSubstitlteStyle,
+                      ),
                     ),
                   ),
                 ),
               Row(
                 children: [
-                  Hero(
-                    tag: 'heroTag ${article.image}${article.id}',
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(article.image),
+                  Expanded(
+                    child: Hero(
+                      tag: 'heroTag ${article.image}${article.id}',
+                      child: Container(
+                        margin: EdgeInsets.only(right: 15),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(article.image),
+                          ),
+                          borderRadius: fotoBorderRadius,
                         ),
-                        borderRadius: fotoBorderRadius,
+                        width: 100,
+                        height: 220,
                       ),
-                      width: 150,
-                      height: 200,
                     ),
                   ),
                   Expanded(
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(left: 15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          if (article.author != null)
-                            Text(
-                              article.author,
-                            ),
+                          Text(
+                            article.author != null
+                                ? article.author
+                                : 'Unknown Author',
+                            style: articleAuthorStyle,
+                          ),
                           SizedBox(height: 10),
                           if (article.price != null)
-                            Text(article.price.toString() + ' €'),
+                            Text(
+                              article.price.toStringAsFixed(2) + ' €',
+                              style: articlePriceStyle,
+                            ),
                         ],
                       ),
                     ),
