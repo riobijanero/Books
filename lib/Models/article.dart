@@ -1,11 +1,12 @@
 import 'dart:convert';
+import '../common/utils/extensions/map_extensions.dart';
 
 class Article {
   final String id;
   final String title;
   final String subtitle;
   final String author;
-  final String price;
+  final double price;
   final String image;
 
   Article({
@@ -22,7 +23,7 @@ class Article {
     String title,
     String subtitle,
     String author,
-    String price,
+    double price,
     String image,
   }) {
     return Article(
@@ -50,12 +51,14 @@ class Article {
     if (map == null) return null;
 
     return Article(
-      id: map['id'],
-      title: map['title'],
-      subtitle: map['subtitle'],
-      author: map['author'],
-      price: map['price'],
-      image: map['image'],
+      id: map.tryParse('artikelId').toString(),
+      title: map.tryParse('titel').toString(),
+      subtitle: map.tryParse('untertitel').toString(),
+      author: map.tryParseNested(['autorInterpret', 'name']).toString(),
+      price: double.parse(
+              map.tryParseNested(['verkaufspreis', 'betrag']).toString()) /
+          100,
+      image: map.tryParse('coverbild').toString(),
     );
   }
 
