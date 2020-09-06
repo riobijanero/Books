@@ -29,7 +29,6 @@ class WebService implements IWebService {
     if (searchTerm == null && searchTerm.isEmpty) {
       throw Exception("Search Term is empty!");
     } else {
-      // url = 'https//$host/api/2003/suche/v1/?suchbegriff=$searchTerm';
       url = Uri.http(host, '/api/2003/suche/v1/?suchbegriff=$searchTerm');
       try {
         final response = await http.get(url, headers: requestHeaders);
@@ -37,7 +36,9 @@ class WebService implements IWebService {
           final body = jsonDecode(response.body);
 
           final Iterable json = body["artikelliste"];
-          return json?.map((article) => Article.fromMap(article))?.toList();
+          List<Article> articlList =
+              json?.map((article) => Article.fromMap(article))?.toList();
+          return articlList;
         } else {
           throw Exception("Unable to perform request!");
         }
