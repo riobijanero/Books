@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import '../models/article.dart';
@@ -36,14 +35,8 @@ class WebService implements IWebService {
         final response = await http.get(url, headers: requestHeaders);
         if (response.statusCode == 200) {
           final body = jsonDecode(response.body);
-          print(body.toString());
-          print('body: ---------------------------');
-          print(body);
-          var testJson = body['artikelliste'];
-          // print('artikelliste: ---------------------------');
-          // print(testJson);
+
           final Iterable json = body["artikelliste"];
-          print(testJson);
           return json?.map((article) => Article.fromMap(article))?.toList();
         } else {
           throw Exception("Unable to perform request!");
