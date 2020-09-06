@@ -3,12 +3,12 @@ import '../../view_models/article_view_model.dart';
 class UiUtils {
   static getCardHeight(ArticleViewModel article) {
     double baseHeight = 400;
-    if (article.subtitle.length > 102) {
+    if (article.subtitle != null && article.subtitle.length > 102) {
       baseHeight += 70;
-    } else if (article.subtitle.length > 68) {
+    } else if (article.subtitle != null && article.subtitle.length > 68) {
       baseHeight += 50;
     }
-    if (article.title.length > 25) {
+    if (article.title != null && article.title.length > 25) {
       baseHeight += 50;
     }
 
