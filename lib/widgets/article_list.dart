@@ -34,20 +34,22 @@ class ArticleList extends StatelessWidget {
                 shape: listTileShape,
                 child: ListTile(
                   contentPadding: EdgeInsets.all(10),
-                  leading: Hero(
-                    tag: 'heroTag ${article.image}${article.id}',
-                    child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(article.image),
-                        ),
-                        borderRadius: fotoBorderRadius,
-                      ),
-                      width: 50,
-                      height: 100,
-                    ),
-                  ),
+                  leading: (article.title != null)
+                      ? Hero(
+                          tag: 'heroTag ${article.image}${article.id}',
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(article.image),
+                              ),
+                              borderRadius: fotoBorderRadius,
+                            ),
+                            width: 50,
+                            height: 100,
+                          ),
+                        )
+                      : null,
                   title: Hero(
                     key: ValueKey('key ${article.title}'),
                     tag: 'heroTag ${article.title}${article.id}',
@@ -60,18 +62,21 @@ class ArticleList extends StatelessWidget {
                       ),
                     ),
                   ),
-                  subtitle: Hero(
-                    key: ValueKey('key ${article.subtitle}'),
-                    tag: 'heroTag ${article.subtitle}${article.id}',
-                    transitionOnUserGestures: true,
-                    child: Material(
-                      type: MaterialType.transparency,
-                      child: Text(
-                        article.subtitle,
-                        style: TextStyle(fontSize: 15, color: Colors.black),
-                      ),
-                    ),
-                  ),
+                  subtitle: (article.subtitle != null)
+                      ? Hero(
+                          key: ValueKey('key ${article.subtitle}'),
+                          tag: 'heroTag ${article.subtitle}${article.id}',
+                          transitionOnUserGestures: true,
+                          child: Material(
+                            type: MaterialType.transparency,
+                            child: Text(
+                              article.subtitle,
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.black),
+                            ),
+                          ),
+                        )
+                      : null,
                 ),
               ),
             );

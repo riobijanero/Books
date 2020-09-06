@@ -21,28 +21,30 @@ class ArticleDetailledWidget extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Hero(
-                tag: 'heroTag ${article.title}${article.id}',
-                transitionOnUserGestures: true,
-                child: Material(
-                  type: MaterialType.transparency,
-                  child: Text(
-                    article.title,
-                    style: articleTitleStyle,
+              if (article.title != null)
+                Hero(
+                  tag: 'heroTag ${article.title}${article.id}',
+                  transitionOnUserGestures: true,
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: Text(
+                      article.title,
+                      style: articleTitleStyle,
+                    ),
                   ),
                 ),
-              ),
-              Hero(
-                tag: 'heroTag ${article.subtitle}${article.id}',
-                transitionOnUserGestures: true,
-                child: Material(
-                  type: MaterialType.transparency,
-                  child: Text(
-                    article.subtitle,
-                    style: articleSubstitlteStyle,
+              if (article.subtitle != null)
+                Hero(
+                  tag: 'heroTag ${article.subtitle}${article.id}',
+                  transitionOnUserGestures: true,
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: Text(
+                      article.subtitle,
+                      style: articleSubstitlteStyle,
+                    ),
                   ),
                 ),
-              ),
               Row(
                 children: [
                   Hero(
@@ -67,11 +69,13 @@ class ArticleDetailledWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            article.author,
-                          ),
+                          if (article.author != null)
+                            Text(
+                              article.author,
+                            ),
                           SizedBox(height: 10),
-                          Text(article.price.toString() + ' €'),
+                          if (article.price != null)
+                            Text(article.price.toString() + ' €'),
                         ],
                       ),
                     ),
