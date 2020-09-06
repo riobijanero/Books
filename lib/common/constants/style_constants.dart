@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 const TextStyle articleTitleStyle =
-    TextStyle(fontSize: 20, color: Colors.black);
+    TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold);
 const TextStyle articleSubstitlteStyle =
-    TextStyle(fontSize: 16, color: Colors.black);
+    TextStyle(fontSize: 18, color: Colors.black);
+const TextStyle articlePriceStyle =
+    TextStyle(fontSize: 20, color: Colors.green, fontWeight: FontWeight.bold);
+const TextStyle articleAuthorStyle =
+    TextStyle(fontSize: 20, color: Colors.black);
 const double searchBarHeight = 50;
 final BoxDecoration detailedWidgetDecoration = BoxDecoration(
   color: Colors.white,
