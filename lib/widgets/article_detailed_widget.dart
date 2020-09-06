@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../common/constants/style_constants.dart';
 import '../view_models/article_view_model.dart';
-import '../common/utils/ui_utils.dart';
 
 class ArticleDetailledWidget extends StatelessWidget {
   final ArticleViewModel article;
@@ -14,9 +13,8 @@ class ArticleDetailledWidget extends StatelessWidget {
       appBar: AppBar(title: Text(article.title)),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-          height: UiUtils.getCardHeight(article),
           decoration: detailedWidgetDecoration,
           width: double.infinity,
           child: Column(
@@ -79,17 +77,17 @@ class ArticleDetailledWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            article.author != null
-                                ? article.author
-                                : 'Unknown Author',
-                            style: articleAuthorStyle,
-                          ),
+                              article.author != null
+                                  ? article.author
+                                  : 'Unknown Author',
+                              style: articleAuthorStyle),
                           SizedBox(height: 10),
-                          if (article.price != null)
-                            Text(
-                              article.price.toStringAsFixed(2) + ' €',
-                              style: articlePriceStyle,
-                            ),
+                          Text(
+                            article.price != null
+                                ? (article.price.toStringAsFixed(2) + ' €')
+                                : 'Price not available',
+                            style: articlePriceStyle,
+                          ),
                         ],
                       ),
                     ),

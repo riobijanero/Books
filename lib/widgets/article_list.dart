@@ -45,8 +45,8 @@ class ArticleList extends StatelessWidget {
                               ),
                               borderRadius: fotoBorderRadius,
                             ),
-                            width: 50,
-                            height: 100,
+                            width: 60,
+                            // height: 100,
                           ),
                         )
                       : null,
@@ -69,10 +69,14 @@ class ArticleList extends StatelessWidget {
                           transitionOnUserGestures: true,
                           child: Material(
                             type: MaterialType.transparency,
-                            child: Text(
-                              article.subtitle,
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.black),
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 10),
+                              child: Text(
+                                article.subtitle,
+                                maxLines: 2,
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black),
+                              ),
                             ),
                           ),
                         )

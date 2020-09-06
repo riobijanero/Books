@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -10,10 +11,10 @@ class WebService implements IWebService {
   final AppConfig appConfig;
 
   WebService(this.appConfig);
+
   String host;
   var url;
   String xClientname;
-
   Map<String, String> requestHeaders;
 
   Future<List<Article>> fetchArticles(String searchTerm) async {
