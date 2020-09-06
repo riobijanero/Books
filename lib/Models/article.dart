@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:coding_challenge/common/utils/article_utils.dart';
+import 'package:coding_challenge/models/cover_image.dart';
+
 import '../common/utils/extensions/map_extensions.dart';
 
 class Article {
@@ -52,13 +55,14 @@ class Article {
 
     return Article(
       id: map.tryParse('artikelId').toString(),
-      title: map.tryParse('titel').toString(),
-      subtitle: map.tryParse('untertitel').toString(),
-      author: map.tryParseNested(['autorInterpret', 'name']).toString(),
+      title: map.tryParse('titel') as String,
+      subtitle: map.tryParse('untertitel') as String,
+      author: map.tryParseNested(['autorInterpret', 'name']) as String,
       price: double.parse(
               map.tryParseNested(['verkaufspreis', 'betrag']).toString()) /
           100,
-      image: map.tryParse('coverbild').toString(),
+      image: ArticleUtils.getImageUrl(
+          CoverImage.fromMap(map.tryParse('coverbild'))),
     );
   }
 
