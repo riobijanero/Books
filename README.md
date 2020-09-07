@@ -1,16 +1,63 @@
 # coding_challenge
 
-A new Flutter project.
+ A cross-platform App that quieries a Thalia article data base for articles, displays them in a list and allows a detailed view of each fetched article.
+ To ensure the list elements in the ui are created on demand, the List is displayed using a ListView.builder (https://api.flutter.dev/flutter/widgets/ListView/ListView.builder.html)
 
-## Getting Started
+## Version
+1.0
 
-This project is a starting point for a Flutter application.
+## Software Toolchain
 
-A few resources to get you started if this is your first Flutter project:
+The following are the key tools utilized: 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Flutter stable, v1.17.3
+- Dart 2.8.4
+- Xcode 11.5
+- Android SDK 29 rev 1
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ utilized IDE:
+- VS Code
+
+Utilized Git Clients:
+- Github
+- Fork
+
+## Running the Project
+
+If using the terminal, first ensure that all dependencies are installed:
+
+```sh
+$ flutter pub get
+```
+
+To ensure a clean build, make sure that all previous builds are removed:
+
+```sh
+$ flutter clean
+```
+
+To build in debug mode,  run:
+
+```sh
+$ flutter run -t lib/main.dart
+```
+
+To build in release mode,  run:
+
+```sh
+$ flutter run -t lib/main.dart --release
+```
+
+for more info on build modes, please see (https://flutter.dev/docs/testing/build-modes)
+
+
+
+## State Management
+
+This project uses [Provider](https://pub.dev/packages/provider) as a global state management solution.
+ 
+## Extension Methods 
+ 
+ Under folder lib/common/utils/extensions can be found the extensions files
+ that hold the various extension methods.
+ 
