@@ -7,7 +7,7 @@ import '../enums/connectivity_status.dart';
 import '../interfaces/i_connectivity_service.dart';
 import '../services/connectivity_service.dart';
 import '../view_models/article_list_view_model.dart';
-import '../widgets/SearchButton.dart';
+import '../widgets/search_button.dart';
 import '../widgets/article_list.dart';
 import '../widgets/searchbar.dart';
 
@@ -38,16 +38,17 @@ class _ArticleListPageState extends State<ArticleListPage> {
     _connectivityService = Provider.of<IConnectivityService>(context);
   }
 
-  void showSnackBar(BuildContext context) {
+  void _showSnackBar(BuildContext context) {
     final snackBar = SnackBar(content: Text('no Internet connection'));
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  onSearchButtonPressed(String value, BuildContext context) async {
+  Future<void> _onSearchButtonPressed(
+      String value, BuildContext context) async {
     ConnectivityStatus connectionInfo =
         await _connectivityService.connectionInfo;
     if (connectionInfo == ConnectivityStatus.Offline) {
-      showSnackBar(context);
+      _showSnackBar(context);
     } else if (!isLoading && value != null && value.isNotEmpty) {
       setState(() {
         isLoading = true;
@@ -82,10 +83,12 @@ class _ArticleListPageState extends State<ArticleListPage> {
                   flex: 4,
                   child: Builder(
                     builder: (context) => SearchBar(
+                      onCancel: _viewModel.cancelSearch,
+                      showCancelIcon: isLoading,
                       searchBarHeight: searchBarHeight,
                       textEditingController: _textEditingController,
                       onSubmitted: (value) async =>
-                          await onSearchButtonPressed(value, context),
+                          await _onSearchButtonPressed(value, context),
                       onChanged: (value) => setState(() {
                         searchTerm = value;
                       }),
@@ -99,17 +102,27 @@ class _ArticleListPageState extends State<ArticleListPage> {
                       searchBarHeight: searchBarHeight,
                       isLoading: isLoading,
                       onSearchButtonPressed: () async =>
-                          await onSearchButtonPressed(searchTerm, context),
+                          await _onSearchButtonPressed(searchTerm, context),
                     ),
                   ),
                 ),
               ],
             ),
             Expanded(
-              child: _viewModel.articleList == null
-                  ? Center(child: Text(_viewModel.errorMessage))
-                  : ArticleList(articleList: _viewModel.articleList),
-            ),
+              child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 50),
+                  child: isLoading
+                      ? RaisedButton(
+                          child: Text('Cancel Search'),
+                          onPressed: _viewModel.cancelSearch,
+                        )
+                      : _viewModel.articleList == null
+                          ? Center(
+                              child: Text(_viewModel.errorMessage,
+                                  style: errorMessageStyle,
+                                  textAlign: TextAlign.center))
+                          : ArticleList(articleList: _viewModel.articleList)),
+            )
           ],
         ),
       ),
