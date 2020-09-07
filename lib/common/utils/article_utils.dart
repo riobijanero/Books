@@ -15,6 +15,6 @@ class ArticleUtils {
     String encodedTitle = coverImage.encodedTitel;
     String fileExtension = coverImage.fileExtension;
 
-    return '${urlPrefix}$imagePrefixId-$formattedOrdering-00/$encodedTitle.$fileExtension';
+    return '$urlPrefix$imagePrefixId-$formattedOrdering-00/$encodedTitle.$fileExtension';
   }
 }
