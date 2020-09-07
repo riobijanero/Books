@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      debugShowCheckedModeBanner: _appConfig.showdebugFlag,
       home: MultiProvider(
         providers: appProvidersSingelton,
         child: ArticleListPage(),
