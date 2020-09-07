@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _appConfig.appName,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MultiProvider(

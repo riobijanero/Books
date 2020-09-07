@@ -19,21 +19,25 @@ class SearchButton extends StatelessWidget {
       padding: EdgeInsets.only(left: 10),
       height: searchBarHeight,
       child: RaisedButton(
+        color: Colors.green[700],
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
-            side: BorderSide(color: Colors.grey)),
+            side: BorderSide(color: Colors.green[600])),
         onPressed: onSearchButtonPressed,
         child: isLoading
             ? SizedBox(
                 height: 25,
                 width: 25,
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.grey,
+                  backgroundColor: Colors.white,
                   strokeWidth: 2.0,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
                 ),
               )
-            : const Icon(Icons.search),
+            : const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
       ),
     );
   }
