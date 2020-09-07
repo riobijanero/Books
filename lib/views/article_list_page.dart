@@ -88,9 +88,9 @@ class _ArticleListPageState extends State<ArticleListPage> {
                       searchBarHeight: searchBarHeight,
                       textEditingController: _textEditingController,
                       onSubmitted: (value) async =>
-                          await _onSearchButtonPressed(value, context),
+                          await _onSearchButtonPressed(value.trim(), context),
                       onChanged: (value) => setState(() {
-                        searchTerm = value;
+                        searchTerm = value.trim();
                       }),
                     ),
                   ),
