@@ -19,7 +19,7 @@ class SearchButton extends StatelessWidget {
       padding: EdgeInsets.only(left: 10),
       height: searchBarHeight,
       child: RaisedButton(
-        color: Colors.green[700],
+        color: Colors.green[500],
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
             side: BorderSide(color: Colors.green[600])),

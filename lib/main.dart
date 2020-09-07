@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 import 'common/configs/app_configs.dart';
-import 'interfaces/i_webservice.dart';
 import 'interfaces/i_connectivity_service.dart';
+import 'interfaces/i_webservice.dart';
 import 'services/connectivity_service.dart';
 import 'services/web_service.dart';
 import 'view_models/article_list_view_model.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
     final ConnectivityService connectivityService = ConnectivityService();
     appProvidersSingelton = [
       // StreamProvider<ConnectivityStatus>.value(
-      //     value: connectivityService.connectionStatusController.stream),
+      //     value: connectivityService.connectionStatusStream),
       Provider<IConnectivityService>.value(value: connectivityService),
       Provider<IWebService>.value(value: webService),
       ChangeNotifierProvider(
