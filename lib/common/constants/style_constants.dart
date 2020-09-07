@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const TextStyle errorMessageStyle = TextStyle(fontSize: 24, color: Colors.grey);
 const TextStyle articleTitleStyle =
     TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold);
 const TextStyle articleSubstitlteStyle =
