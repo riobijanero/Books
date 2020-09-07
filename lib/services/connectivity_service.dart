@@ -10,13 +10,14 @@ class ConnectivityService implements IConnectivityService {
   Connectivity _connectivity;
 
   ConnectivityService() {
-    _connectionStatusController = StreamController<ConnectivityStatus>();
+    _connectionStatusController =
+        StreamController<ConnectivityStatus>.broadcast();
     _connectivity = Connectivity();
 
     _initNetworkStatusListener();
   }
-  StreamController<ConnectivityStatus> get connectionStatusController =>
-      _connectionStatusController;
+  Stream<ConnectivityStatus> get connectionStatusStream =>
+      _connectionStatusController.stream;
 
   void _initNetworkStatusListener() {
     /// subscribe to the connectivity changed stream
