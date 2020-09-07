@@ -16,9 +16,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
   static AppConfig _appConfig = AppConfig();
+  static List<SingleChildWidget> appProvidersSingelton;
 
   @override
   Widget build(BuildContext context) {
+    _getAppProvidersSingelton();
     return MaterialApp(
       title: _appConfig.appName,
       theme: ThemeData(
@@ -26,16 +28,16 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MultiProvider(
-        providers: _getAppProvidersSingelton(),
+        providers: appProvidersSingelton,
         child: ArticleListPage(),
       ),
     );
   }
 
-  List<SingleChildWidget> _getAppProvidersSingelton() {
+  static void _getAppProvidersSingelton() {
     final WebService webService = WebService(_appConfig);
     final ConnectivityService connectivityService = ConnectivityService();
-    return [
+    appProvidersSingelton = [
       // StreamProvider<ConnectivityStatus>.value(
       //     value: connectivityService.connectionStatusController.stream),
       Provider<IConnectivityService>.value(value: connectivityService),
