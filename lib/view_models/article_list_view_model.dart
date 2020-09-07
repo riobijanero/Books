@@ -18,14 +18,19 @@ class ArticleListViewModel extends ChangeNotifier {
     errorMessage = '';
 
     if (keyword != null && keyword.isNotEmpty) {
-      final result = await webService.fetchArticles(keyword);
-      articleList = result
-          ?.map((article) => ArticleViewModel(article: article))
-          ?.toList();
-      if (articleList == null) {
-        errorMessage = 'no results found for \"$keyword\"';
+      try {
+        final result = await webService.fetchArticles(keyword);
+        articleList = result
+            ?.map((article) => ArticleViewModel(article: article))
+            ?.toList();
+        if (articleList == null) {
+          errorMessage = 'no results found for \"$keyword\"';
+        }
+        notifyListeners();
+      } catch (e) {
+        articleList = null;
+        errorMessage = 'Error performing your request for \"$keyword\"';
       }
-      notifyListeners();
     }
   }
 
@@ -52,4 +57,6 @@ class ArticleListViewModel extends ChangeNotifier {
   void cancelRequest() {
     dataSub?.cancel();
   }
+
+  void cancelSearch() {}
 }
