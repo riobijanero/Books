@@ -45,6 +45,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
 
   Future<void> _onSearchButtonPressed(
       String value, BuildContext context) async {
+    FocusManager.instance.primaryFocus.unfocus();
     ConnectivityStatus connectionInfo =
         await _connectivityService.connectionInfo;
     if (connectionInfo == ConnectivityStatus.Offline) {
