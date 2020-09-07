@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import '../models/article.dart';
@@ -18,6 +19,7 @@ class WebService implements IWebService {
   Map<String, String> requestHeaders;
 
   Future<List<Article>> fetchArticles(String searchTerm) async {
+    int statusCode;
     host = appConfig.host;
     xClientname = appConfig.xClientname;
 
@@ -33,7 +35,8 @@ class WebService implements IWebService {
       url = Uri.http(host, '/api/2003/suche/v1/?suchbegriff=$searchTerm');
       try {
         final response = await http.get(url, headers: requestHeaders);
-        if (response.statusCode == 200) {
+        statusCode = response.statusCode;
+        if (statusCode == 200) {
           final body = jsonDecode(response.body);
 
           final Iterable json = body["artikelliste"];
@@ -41,11 +44,13 @@ class WebService implements IWebService {
               json?.map((article) => Article.fromMap(article))?.toList();
           return articlList;
         } else {
-          throw Exception("Unable to perform request!");
+          throw Exception(
+              "Unable to perform search request! http statuscode: $statusCode");
         }
       } catch (e) {
         print(e);
-        throw Exception("network request failed");
+        log(e);
+        throw Exception("network request failed, http statuscode: $statusCode");
       }
     }
   }
