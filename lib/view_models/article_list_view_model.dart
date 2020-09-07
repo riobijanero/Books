@@ -58,5 +58,6 @@ class ArticleListViewModel extends ChangeNotifier {
     dataSub?.cancel();
   }
 
+// TODO implement cancel search
   void cancelSearch() {}
 }
