@@ -7,14 +7,19 @@ class SearchBar extends StatelessWidget {
     @required TextEditingController textEditingController,
     @required Function(String) onSubmitted,
     @required Function(String) onChanged,
+    @required void Function() onCancel,
+    @required bool showCancelIcon,
   })  : _textEditingController = textEditingController,
         _onSubmitted = onSubmitted,
         _onChanged = onChanged,
+        _showCancelIcon = showCancelIcon,
+        _onCancel = onCancel,
         super(key: key);
 
   final double searchBarHeight;
   final TextEditingController _textEditingController;
-
+  final bool _showCancelIcon;
+  final void Function() _onCancel;
   final Function(String) _onChanged;
   final Function(String) _onSubmitted;
 
@@ -30,10 +35,19 @@ class SearchBar extends StatelessWidget {
         controller: _textEditingController,
         onSubmitted: (value) {
           _onSubmitted(value);
-          _textEditingController.clear();
         },
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
+            suffixIcon: _showCancelIcon
+                ? IconButton(
+                    icon: Icon(
+                      Icons.cancel,
+                      color: Colors.white,
+                      size: 22,
+                    ),
+                    onPressed: _onCancel,
+                  )
+                : null,
             hintText: 'Search',
             hintStyle: TextStyle(color: Colors.white),
             border: InputBorder.none),
