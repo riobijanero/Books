@@ -1,6 +1,6 @@
 # coding_challenge
 
- A cross-platform App that quieries a Thalia article data base for articles, displays them in a list and allows a detailed view of each fetched article.
+ A cross-platform App that quieries a Thalia article data base for book, displays them in a list and allows a detailed view of each fetched book item.
  To ensure the list elements in the ui are created on demand, the List is displayed using a ListView.builder (https://api.flutter.dev/flutter/widgets/ListView/ListView.builder.html)
 
 ## Version
